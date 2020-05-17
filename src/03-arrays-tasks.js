@@ -276,8 +276,14 @@ function getSecondItems(arr) {
  *  [ 'a', 'b', 'c', null ] => [ 'a', 'b','b', 'c','c','c',  null,null,null,null ]
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
+function propagateItemsByPositionIndex(arr) {
+  let acc = [];
+  return arr.reduce((accumulator, item, index) => {
+    const tempArr = new Array(index + 1);
+    tempArr.fill(item);
+    acc = accumulator.concat(tempArr);
+    return acc;
+  }, []);
 }
 
 
@@ -477,8 +483,13 @@ function sortCitiesArray(arr) {
  *           [0,0,0,1,0],
  *           [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  const arr = new Array(n);
+  const brr = new Array(n);
+  brr.fill(0);
+  arr.fill(brr);
+
+  return arr.map((row, i) => row.map((item, j) => i === j));
 }
 
 /**
@@ -510,8 +521,17 @@ function getIntervalArray(start, end) {
  *   [ 'a', 'a', 'a', 'a' ]  => [ 'a' ]
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
-function distinct(/* arr */) {
-  throw new Error('Not implemented');
+function distinct(arr) {
+  const brr = arr.sort((a, b) => (a < b ? -1 : 1));
+  return brr.reduce((accumulator, currentValue, index) => {
+    if (accumulator.length === 0) {
+      accumulator.push(currentValue);
+    } else if (currentValue !== brr[index - 1]) {
+      accumulator.push(currentValue);
+    }
+
+    return accumulator;
+  }, []);
 }
 
 /**
